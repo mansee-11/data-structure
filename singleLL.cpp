@@ -53,7 +53,7 @@ void del_after(int x)
     temp = first;
     while (temp->data != x)
     {
-        temp = temp->next;
+        temp = temp->next;     
     }
     ttemp = temp->next;
     p = ttemp->next;
@@ -75,6 +75,7 @@ void del_before(int x)
     ttemp->next = p;
     temp->next = NULL;
     delete temp;
+
 }
 void del_secondlast()
 {
@@ -183,7 +184,7 @@ void swapmn(int x, int y)
 
 int main()
 {
-    int i, a, b, j;
+    int i, a, b, j=1;
     init();
     cout << "enter element one by one to create link list";
     create_first();
@@ -191,7 +192,7 @@ int main()
     {
         add_node();
     }
-    while (j = 1)
+    while (j==1)
     {
         cout << "1- add node after given data\n2-add before 1st node \n3-add before given data\n4-add before last node";
         cout << "5-del before given data\n6-del after given data\n7-delfirst node\n8-del secondlast node ";
