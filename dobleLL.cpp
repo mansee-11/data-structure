@@ -2,164 +2,171 @@
 #include<conio.h>
 #include<iostream>
 using namespace std;
-struct node{
-    int data;
-    node *prev,*next;
-};
-node *first,*temp,*ttemp,*p;
-void init() 
+struct node
 {
-    first = temp = ttemp = NULL;
+    int data;
+    node *next,*prev;
+};
+node*first,*temp,*ttemp,*p;
+void init()
+{
+    first=ttemp=temp=p=NULL;
 }
 void create_first()
 {
-    first = new node;
-    first -> next = NULL;
+    first= new node;
     cin>>first->data;
+    first->prev=first->next=first;
 }
 void add_node()
 {
-    temp = first;
-    while(temp->next!=NULL)
-    {
-        temp = temp-> next;
-    }
-    ttemp = new node;
-    ttemp ->next = NULL;
-    temp -> next = ttemp;
+    temp=first->prev;
+    ttemp=new node;
     cin>>ttemp->data;
+    ttemp->next=first;
+    ttemp->prev=temp;
+    temp->next=ttemp;
+    first->prev=ttemp;
+}
+void disp()
+{
+    ttemp=first;
+    do
+    {
+        cout<<ttemp->data<<"\n";
+        ttemp=ttemp->next;
+    }
+    while(ttemp!=first);
+}
+void add_before_first()
+{
+    temp=first;
+    ttemp=new node;
+    cout<<"enter data to insert:-";
+    cin>>ttemp->data;
+    ttemp->prev=temp->prev;
+    temp->prev->next=ttemp;
+    temp->prev=ttemp;
+    ttemp->next=temp;
+    first=ttemp;
+}
+void del_last()
+{
+    temp=first->prev;
+    ttemp=temp->prev;
+    ttemp->next=first;
+    first->prev=ttemp;
+    temp->next=temp->prev=NULL;
+    delete temp;
 }
 void del_first()
 {
     temp=first;
-    first=first->next;
-    temp ->next=NULL;
+    ttemp=first->prev;
+    ttemp->next=temp->next;
+    first=temp->next;
+    temp->next->prev=ttemp;
+    temp->next=temp->prev=NULL;
     delete temp;
 }
-void disp()
+void swap_12()
 {
-    temp = first;
-    while(temp->next!=NULL)
-    {
-        cout<<temp -> data<<"\n";
-        temp=temp->next;
-    }
-    cout<<temp -> data;
-}
-void del_after(int x){
-  temp=first;
-  while(temp->data!=x)
-  {
-    temp=temp->next;
-  }
-  ttemp=temp->next;
-  p=ttemp->next;
-  temp->next=p;
-  ttemp->next=NULL;
-  delete ttemp;
-}
-
-void del_before(int x){
-      
     temp=first;
-    while(temp->next->data!=x){
-        ttemp=temp;
-        temp=temp->next;
-    }
+    ttemp=first->prev;
     p=temp->next;
     ttemp->next=p;
-    temp->next=NULL;
-    delete temp;
- }
- void del_secondlast()
- {
-  temp=first;
-  while(temp->next->next!=NULL){
-          ttemp=temp;
-          temp=temp->next;
-      }
-      p=temp->next;
-      temp->next=NULL;
-      ttemp->next=p;
-      delete temp;
-}
-void swap12(){
-  temp=first;
-  ttemp=temp->next;
-  p=ttemp->next;
-  ttemp->next=temp;
-  temp->next=p;
-  first=ttemp;
-}
-void swap_1_last(){
-  temp=first;
-  while(temp->next!=NULL){
-    ttemp=temp;
-    temp=temp->next;
-  }
-  p=first->next;
-  ttemp->next = first;
-  first->next=NULL;
-  temp->next=p;
-  first=temp;   
-}
-void add_after(int x, int y){
-    temp=first;
-    while(temp ->data !=x){
-            temp=temp->next;
-    }
-    ttemp=temp-> next;
-    p=new node;
-    p->data=y;
+    p->prev=ttemp;
+    temp->next=p->next;
+    temp->next->prev=temp;
+    temp->prev=p;
     p->next=temp;
-    temp->next=p;
 }
-
-void add_before(int x, int y){
-   temp=first;
-   while(temp->data !=x){
-     ttemp=temp;
-     temp=temp->next;
-   }
-   p=new node;
-   p->data=y;
-   p->next=temp;
-   ttemp->next;
-}
-
-void add_before_first(int x){
-   temp=new node;
-   temp->data=x;
-   temp->next=first;
-   first=temp;
-}
-
-void add_before_last(int x)
+void swap_1st_last()
 {
     temp=first;
-    while(temp->next!=NULL)
-    {
-        ttemp=temp;
-        temp=temp->next;
-    }
-    p=new node;
-    p->data=x;
+    ttemp=first->prev;
+    p=ttemp->prev;
     p->next=temp;
-    ttemp->next=p;
+    ttemp->prev=temp;
+    ttemp->next=temp->next;
+    temp->next=ttemp;
+    temp->prev=p;
+    first=ttemp;
 }
-
+void swap_l_sl()
+{
+    temp=first->prev;
+    ttemp=temp->prev;
+    temp->prev=ttemp->prev;
+    temp->prev->next=temp;
+    temp->next=ttemp;
+    ttemp->prev=temp;
+    ttemp->next=first;
+    first->prev=ttemp;
+}
 int main()
 {
+    int n,i,j=1;
     init();
+    cout<<"To create link list enter no of elements:-";
+    cin>>n;
+    cout<<"enter element of link list one by one:-";
     create_first();
-    add_node();
-    add_node();
-    add_node();
-    add_before(5,7);
-    del_after(5);
-    del_before(2);
-    del_secondlast();
-    swap_1_last();
-    swap12();
-    disp();
+    for(i=0;i<n-1;i++)
+    {
+        add_node();
+    }
+    while(j==1)
+    {
+        cout<<"1-add new element\n2-display\n3-add before first\n";
+        cout<<"4-del first\n5-del last\n";
+        cout<<"6-swap 1st 2nd\n7-swap 1st last\n8-swap last second last\n9-enter any no. to exit\n";
+        cout<<"enter your choice:-";
+        cin>>i;
+        switch(i)
+        {
+            case 1:
+            {
+                cout<<"enter data to insert:-";
+                add_node();
+                break;
+            }
+            case 2:
+            {
+                disp();
+                break;
+            }
+            case 3:
+            {
+                add_before_first();
+                break;
+            }
+            case 4:
+            {
+                del_first();
+                break;
+            }
+            case 5:
+            {
+                del_last();
+                break;
+            }
+            case 6:
+            {
+                swap_12();
+                break;
+            }
+            case 7:
+            {
+                swap_1st_last();
+                break;
+            }
+            case 8:
+            {
+                swap_l_sl();
+                break;
+            }
+            default: j=0;
+        }
+    }
 }
