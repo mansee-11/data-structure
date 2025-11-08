@@ -196,11 +196,13 @@ void reverse()
 }
 int main()
 {
-    int i, a, b, j=1;
+    int i, a, b, n, j=1;
     init();
+    cout <<"enter no. of element you want in link list:= ";
+    cin >> n;
     cout << "enter element one by one to create link list";
     create_first();
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < n-1; i++)
     {
         add_node();
     }

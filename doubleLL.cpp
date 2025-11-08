@@ -206,9 +206,10 @@ int main()
     }
     while (j==1)
     {
-        cout << "\n1- add node after given data\n2-add before 1st node \n3-add before given data\n4-add before last node";
-        cout << "5-del before given data\n6-del after given data\n7-delfirst node\n8-del secondlast node ";
-        cout << "9-swap 1st and 2nd\n10-swap 1st and last\n11-swap mth and nth term\n12-display\n13-exit\n";
+        cout << "\n1- add node after given data\n2-add before 1st node \n3-add before given data";
+        cout << "\n4-add before last node\n5-del before given data\n6-del after given data\n";
+        cout << "7-delfirst node\n8-del secondlast node\n9-swap 1st and 2nd\n10-swap 1st and last";
+        cout << "\n11-swap mth and nth term\n12-display\n13-exit\n";
         cout << "enter your choice from the menu:-";
         cin >> i;
         switch (i)
@@ -262,6 +263,7 @@ int main()
         case 8:
         {
             del_secondlast();
+            break;
         }
         case 9:
         {
