@@ -192,6 +192,20 @@ void swapmn(int x,int y)
     temp->next=ttemp->next;
     ttemp->next=p;
 }
+void reverse()
+{
+    temp=first;
+    p=ttemp=NULL;
+    while(temp!=NULL)
+    {
+        ttemp=temp->next;
+        temp->next=p;
+        p=temp;
+        temp->prev=ttemp;
+        temp=ttemp;
+    }
+    first=p;
+}
 int main()
 {
     int i, a, b, n,j=1;
@@ -209,7 +223,7 @@ int main()
         cout << "\n1- add node after given data\n2-add before 1st node \n3-add before given data";
         cout << "\n4-add before last node\n5-del before given data\n6-del after given data\n";
         cout << "7-delfirst node\n8-del secondlast node\n9-swap 1st and 2nd\n10-swap 1st and last";
-        cout << "\n11-swap mth and nth term\n12-display\n13-exit\n";
+        cout << "\n11-swap mth and nth term\n12-display\n13-reverse\n14-exit\n";
         cout << "enter your choice from the menu:-";
         cin >> i;
         switch (i)
@@ -286,6 +300,10 @@ int main()
         {
             disp();
             break;
+        }
+        case 13:
+        {
+            reverse();
         }
         default:
         {
