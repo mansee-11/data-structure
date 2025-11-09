@@ -174,12 +174,12 @@ void swapmn(int x, int y)
     {
         ttemp = ttemp->next;
     }
-    p = temp->next->next;
-    temp->next->next = ttemp->next->next;
-    ttemp->next->next = p;
     p = temp->next;
     temp->next = ttemp->next;
     ttemp->next = p;
+    p = temp->next->next;
+    temp->next->next = ttemp->next->next;
+    ttemp->next->next = p;
 }
 void reverse()
 {
@@ -193,6 +193,84 @@ void reverse()
         p=temp;             //saving prev value in p
         temp=ttemp;         //going on next
     }
+    first=p;
+}
+struct node1
+{
+    int data1;
+    node1 *next1;
+};
+node1 *first1,*temp1,*ttemp1,*p1;
+void init1()
+{
+    first1=temp1=ttemp1=p1=NULL;
+}
+void create_first1()
+{
+    first1 = new node1;
+    first1->next1= NULL;
+    first1->data1=first->data;
+}
+void create_ll2()
+{
+    init1();
+    create_first1();
+    temp=first;
+    temp1=first1;
+    while(temp->next!=NULL)
+    {
+        temp=temp->next;
+        ttemp1=new node1;
+        temp1->next1=ttemp1;
+        temp1=ttemp1;
+        ttemp1->data1=temp->data;
+        ttemp1->next1=NULL;
+    }
+}    
+void reverse_ll2()
+{    
+    create_ll2();
+    temp1=first1;
+    ttemp1=NULL;
+    p1=NULL;
+    while(temp1!=NULL)
+    {
+        ttemp1=temp1->next1;
+        temp1->next1=p1;
+        p1=temp1;
+        temp1=ttemp1;
+    }
+    first1=p1;
+}
+void palindrome()
+{
+    reverse_ll2();
+    temp=first;
+    temp1=first1;
+    while(temp!=NULL)
+    {
+        if(temp->data!=temp1->data1)
+        {
+            cout<<"not palindrome"<<"\n";
+            break;
+        }
+        temp=temp->next;
+        temp1=temp1->next1;
+    }
+    if(temp==NULL)
+    {
+        cout<<"palindrome"<<"\n";
+    }
+}
+void disp1()
+{
+    temp1 = first1;
+    while (temp1->next1!= NULL)
+    {
+        cout << temp1->data1 << "\n";
+        temp1 = temp1->next1;
+    }
+    cout << temp1->data1 << "\n";
 }
 int main()
 {
@@ -211,7 +289,7 @@ int main()
         cout << "1- add node after given data\n2-add before 1st node \n3-add before given data\n4-add before last node";
         cout << "5-del before given data\n6-del after given data\n7-delfirst node\n8-del secondlast node ";
         cout << "9-swap 1st and 2nd\n10-swap 1st and last\n11-swap mth and nth term\n";
-        cout<<"12-display\n13-reverse link list\n14 exit\n";
+        cout<<"12-display\n13-reverse link list\n14-palindrome\n15-exit\n";
         cout << "enter your choice from the menu:-";
         cin >> i;
         switch (i)
@@ -292,6 +370,10 @@ int main()
         {
             reverse();
             break;
+        }
+        case 14:
+        {
+            palindrome();
         }
         default:
         {
