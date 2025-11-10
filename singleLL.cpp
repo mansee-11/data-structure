@@ -272,13 +272,115 @@ void disp1()
     }
     cout << temp1->data1 << "\n";
 }
+struct llo
+{
+    int datao;
+    llo *nexto;
+};
+llo *tempo,*ttempo,*po,*firsto;
+struct lle
+{
+    int datae;
+    lle *nexte;
+};
+lle *tempe,*ttempe,*pe,*firste;
+void inito()
+{
+    firsto=tempo=ttempo=NULL;
+}
+void create_firsto()
+{
+    inito();
+    firsto = new llo;
+    firsto->nexto= NULL;
+    firsto->datao=temp->data;
+}
+void inite()
+{
+    firste=tempe=ttempe=NULL;
+}
+void create_firste()
+{
+    inite();
+    firste = new lle;
+    firste->nexte= NULL;
+    firste->datae=temp->data;
+}
+void odd_even()
+{
+    temp=first;
+    int o=0,e=0;
+    tempo=ttempo=NULL;
+    tempe=ttempe=NULL;
+    while(temp!=NULL)
+    {
+        if((temp->data)%2==0)
+        {
+            if(e==0)
+            {
+                create_firste();
+                ttempe=firste;
+                e+=1;
+            }
+            else
+            {
+                tempe=new lle;
+                tempe->datae=temp->data;
+                tempe->nexte=NULL;
+                ttempe->nexte=tempe; 
+                ttempe=tempe;
+            }
+            temp=temp->next;
+        }
+        else
+        {
+            if(o==0)
+            {
+               create_firsto();
+               ttempo=firsto;
+               o+=1;
+            }
+            else
+            {
+                tempo=new llo;
+                tempo->datao=temp->data;
+                tempo->nexto=NULL;
+                ttempo->nexto=tempo;
+                ttempo=tempo;
+            }
+            temp=temp->next;
+        }
+    }
+}
+void dispo()
+{
+    cout<<"odd elements \n";
+    tempo = firsto;
+    while (tempo->nexto!= NULL)
+    {
+        cout << tempo->datao << "\n";
+        tempo = tempo->nexto;
+    }
+    cout << tempo->datao << "\n";
+}
+void dispe()
+{
+    cout<<"even elements \n";
+    tempe = firste;
+    while (tempe->nexte!=NULL)
+    {
+        cout << tempe->datae << "\n";
+        tempe = tempe->nexte;
+    }
+    cout << tempe->datae << "\n";
+}
 int main()
 {
     int i, a, b, n, j=1;
     init();
     cout <<"enter no. of element you want in link list:= ";
     cin >> n;
-    cout << "enter element one by one to create link list";
+    cout << "enter element one by one to create link list:-\n";
     create_first();
     for (i = 0; i < n-1; i++)
     {
@@ -289,14 +391,14 @@ int main()
         cout << "1- add node after given data\n2-add before 1st node \n3-add before given data\n4-add before last node";
         cout << "5-del before given data\n6-del after given data\n7-delfirst node\n8-del secondlast node ";
         cout << "9-swap 1st and 2nd\n10-swap 1st and last\n11-swap mth and nth term\n";
-        cout<<"12-display\n13-reverse link list\n14-palindrome\n15-exit\n";
+        cout<<"12-display\n13-reverse link list\n14-palindrome\n15-create to link list odd and even\n16-exit\n";
         cout << "enter your choice from the menu:-";
         cin >> i;
         switch (i)
         {
         case 1:
         {
-            cout << "input data to add after it and theen enter data to be added";
+            cout << "input data to add after it and then enter data to be added";
             cin >> a >> b;
             add_after(a, b);
             break;
@@ -343,6 +445,7 @@ int main()
         case 8:
         {
             del_secondlast();
+            break;
         }
         case 9:
         {
@@ -374,6 +477,13 @@ int main()
         case 14:
         {
             palindrome();
+        }
+        case 15:
+        {
+            odd_even();
+            dispo();
+            dispe();
+            break;
         }
         default:
         {
