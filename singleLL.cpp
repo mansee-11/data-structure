@@ -7,10 +7,10 @@ struct node
     int data;
     node *next;
 };
-node *first, *temp, *ttemp, *p;
+node *first, *temp, *ttemp, *p,*tempe,*ttempe,*pe,*firste,*tempo,*ttempo,*po,*firsto,*first1,*temp1,*ttemp1,*p1;
 void init()
 {
-    first = temp = ttemp = NULL;
+    first = temp = ttemp =first1=temp1=ttemp1=p1=firsto=tempo=ttempo=firste=tempe=ttempe= NULL;
 }
 void create_first()
 {
@@ -195,36 +195,25 @@ void reverse()
     }
     first=p;
 }
-struct node1
-{
-    int data1;
-    node1 *next1;
-};
-node1 *first1,*temp1,*ttemp1,*p1;
-void init1()
-{
-    first1=temp1=ttemp1=p1=NULL;
-}
 void create_first1()
 {
-    first1 = new node1;
-    first1->next1= NULL;
-    first1->data1=first->data;
+    first1 = new node;
+    first1->next= NULL;
+    first1->data=first->data;
 }
 void create_ll2()
 {
-    init1();
     create_first1();
     temp=first;
     temp1=first1;
     while(temp->next!=NULL)
     {
         temp=temp->next;
-        ttemp1=new node1;
-        temp1->next1=ttemp1;
+        ttemp1=new node;
+        temp1->next=ttemp1;
         temp1=ttemp1;
-        ttemp1->data1=temp->data;
-        ttemp1->next1=NULL;
+        ttemp1->data=temp->data;
+        ttemp1->next=NULL;
     }
 }    
 void reverse_ll2()
@@ -235,8 +224,8 @@ void reverse_ll2()
     p1=NULL;
     while(temp1!=NULL)
     {
-        ttemp1=temp1->next1;
-        temp1->next1=p1;
+        ttemp1=temp1->next;
+        temp1->next=p1;
         p1=temp1;
         temp1=ttemp1;
     }
@@ -249,13 +238,13 @@ void palindrome()
     temp1=first1;
     while(temp!=NULL)
     {
-        if(temp->data!=temp1->data1)
+        if(temp->data!=temp1->data)
         {
             cout<<"not palindrome"<<"\n";
             break;
         }
         temp=temp->next;
-        temp1=temp1->next1;
+        temp1=temp1->next;
     }
     if(temp==NULL)
     {
@@ -265,46 +254,24 @@ void palindrome()
 void disp1()
 {
     temp1 = first1;
-    while (temp1->next1!= NULL)
+    while (temp1->next!= NULL)
     {
-        cout << temp1->data1 << "\n";
-        temp1 = temp1->next1;
+        cout << temp1->data << "\n";
+        temp1 = temp1->next;
     }
-    cout << temp1->data1 << "\n";
-}
-struct llo
-{
-    int datao;
-    llo *nexto;
-};
-llo *tempo,*ttempo,*po,*firsto;
-struct lle
-{
-    int datae;
-    lle *nexte;
-};
-lle *tempe,*ttempe,*pe,*firste;
-void inito()
-{
-    firsto=tempo=ttempo=NULL;
+    cout << temp1->data << "\n";
 }
 void create_firsto()
 {
-    inito();
-    firsto = new llo;
-    firsto->nexto= NULL;
-    firsto->datao=temp->data;
-}
-void inite()
-{
-    firste=tempe=ttempe=NULL;
+    firsto = new node;
+    firsto->next= NULL;
+    firsto->data=temp->data;
 }
 void create_firste()
 {
-    inite();
-    firste = new lle;
-    firste->nexte= NULL;
-    firste->datae=temp->data;
+    firste = new node;
+    firste->next= NULL;
+    firste->data=temp->data;
 }
 void odd_even()
 {
@@ -324,10 +291,10 @@ void odd_even()
             }
             else
             {
-                tempe=new lle;
-                tempe->datae=temp->data;
-                tempe->nexte=NULL;
-                ttempe->nexte=tempe; 
+                tempe=new node;
+                tempe->data=temp->data;
+                tempe->next=NULL;
+                ttempe->next=tempe; 
                 ttempe=tempe;
             }
             temp=temp->next;
@@ -342,10 +309,10 @@ void odd_even()
             }
             else
             {
-                tempo=new llo;
-                tempo->datao=temp->data;
-                tempo->nexto=NULL;
-                ttempo->nexto=tempo;
+                tempo=new node;
+                tempo->data=temp->data;
+                tempo->next=NULL;
+                ttempo->next=tempo;
                 ttempo=tempo;
             }
             temp=temp->next;
@@ -356,23 +323,23 @@ void dispo()
 {
     cout<<"odd elements \n";
     tempo = firsto;
-    while (tempo->nexto!= NULL)
+    while (tempo->next!= NULL)
     {
-        cout << tempo->datao << "\n";
-        tempo = tempo->nexto;
+        cout << tempo->data << "\n";
+        tempo = tempo->next;
     }
-    cout << tempo->datao << "\n";
+    cout << tempo->data << "\n";
 }
 void dispe()
 {
     cout<<"even elements \n";
     tempe = firste;
-    while (tempe->nexte!=NULL)
+    while (tempe->next!=NULL)
     {
-        cout << tempe->datae << "\n";
-        tempe = tempe->nexte;
+        cout << tempe->data << "\n";
+        tempe = tempe->next;
     }
-    cout << tempe->datae << "\n";
+    cout << tempe->data << "\n";
 }
 int main()
 {
@@ -477,6 +444,7 @@ int main()
         case 14:
         {
             palindrome();
+            break;
         }
         case 15:
         {
