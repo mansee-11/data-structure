@@ -1,29 +1,30 @@
 #include <iostream>
 using namespace std;
-#define max 10
 
 struct stack{
-    int data[max];
-    int top;
+    int data;
+    stack *next;
 };
-stack s1,*p1;
+stack *temp,*top;
 void init()
 {
-    p1=&s1;
-    p1->top=-1;
+    temp=top=NULL;
 }
-void push1(int x)
+void push(int x)
 {
-    p1->top++;
-    p1->data[p1->top]=x;
+    temp=new stack;
+    temp->data=x;
+    temp->next=top;
+    top=temp;    
 }
 void disp()
 {
     cout<<"reversed num = ";
-    for(int i=0;i!=p1->top+1;i++)
-    {
-        cout<<p1->data[i];
-    }
+    temp=top;
+    do{
+        cout<<temp->data;
+        temp=temp->next;
+    }while(temp!=NULL);
 }
 int main()
 {
@@ -34,8 +35,9 @@ int main()
     while(num!=0)
     {
         a=num%10;
-        push1(a);
+        push(a);
         num=num/10;
     }
     disp();
+    return 0;
 }
