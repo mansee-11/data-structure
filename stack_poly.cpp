@@ -45,15 +45,17 @@ void dispp()
     while(tempp!=NULL)
     {
         cout<<tempp->data<<"\n";
+        tempp=tempp->next;
     }
 }
 void dispc()
 {
-    cout<<"power stack:-\n";
+    cout<<"coefficent stack:-\n";
     tempc=topc;
     while(tempc!=NULL)
     {
         cout<<tempc->data<<"\n";
+        tempc=tempc->next;
     }
 }
 
@@ -97,7 +99,7 @@ int main()
             pushc(poly[i]);
             pushp('0');
         } 
-        else
+        else if(poly[i] == '+')
         {
             continue;
         }
