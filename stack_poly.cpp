@@ -65,7 +65,7 @@ int main()
     cout<<"enter polynomial:- ";
     cin>>poly;
     
-    for(int i=0;i<poly.length()-1;i++)
+    for(int i=0;i<=poly.length()-1;i++)
     {
         if(poly[i] == 'x' && i == 0)
         {
