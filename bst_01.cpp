@@ -113,6 +113,21 @@ int width(bst *p,int lv)
     }
     return width(p->left,lv)+width(p->right,lv);    //3rd statement(recursive call)
 }
+int height(bst *p)
+{
+    if(p==NULL)
+    {
+        return -1;  
+    }
+    else if(height(p->left) > height(p->right))
+    {
+        return height(p->left)+1;
+    }
+    else
+    {
+        return height(p->right)+1;
+    }
+}
 int main()
 {
     init();
@@ -135,7 +150,8 @@ int main()
         cout << "4-postorder treversing\n";
         cout<<"5-find level of node\n";
         cout<<"6-width of level\n";
-        cout<<"7-any no to exit\n";
+        cout<<"7-height of tree\n";
+        cout<<"8-any no to exit\n";
         cout << "Enter your choice:- ";
         cin >> c;
         if (c == 1)
@@ -167,6 +183,10 @@ int main()
             cout<<"enter level to find width:- ";
             cin>>a;
             cout<<"width of given level:- "<<width(root,a);
+        }
+        else if(c==7)
+        {
+            cout<<"height of tree:- "<<height(root);
         }
         else
         {
