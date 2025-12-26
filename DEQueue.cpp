@@ -55,11 +55,39 @@ void BEnQ(int x)
     }
     else
     {
-        for
+        for(int i=p->rear;i>=p->front;i--)
+        {
+            p->data[i+1]=p->data[i];
+        }
+        p->data[p->front]=x;
+        ++p->rear;
+    }
+}
+void EEnQ(int x)
+{
+    if(full()==1) return;
+    if(p->rear==-1)
+    {
+        p->front=p->rear=0;
+        p->data[p->rear]=x;
+    }
+    else if(p->rear!=max-1)
+    {
+        p->rear++;
+        p->data[p->rear]=x;
+    }
+    else
+    {
+        for(int i=p->front;i<=p->rear;i++)
+        {
+            p->data[i-1]=p->data[i];
+        }
+        --p->front;
+        p->data[p->rear]=x;
     }
 }
 
-int DeQ()
+int BDeQ()
 {
     int x;
     if(empty()==1) return -1;
@@ -74,16 +102,33 @@ int DeQ()
     }
     return x;
 }
+int EDeQ()
+{
+    int x;
+    if(empty()==1) return -1;
+    x=p->data[p->rear];
+    if(p->front==p->rear)
+    {
+        p->front=p->rear=-1;
+    }
+    else
+    {
+        p->rear--;
+    }
+    return x;
+}
 
 int main()
 {
     init();
-    EnQ(10);
-    EnQ(20);
-    EnQ(30);
-    EnQ(40);
-    EnQ(50);
-    EnQ(60); //full can't be inserted
-    cout<<DeQ()<<endl;
-    cout<<DeQ()<<endl;
-    cout<<DeQ()<<endl;
+    BEnQ(10);
+    BEnQ(20);
+    BEnQ(30);
+    EEnQ(40);
+    EEnQ(50);
+    EEnQ(60); //full can't be inserted
+    cout<<BDeQ()<<endl;
+    cout<<BDeQ()<<endl;
+    cout<<EDeQ()<<endl;
+    cout<<EDeQ()<<endl;
+}
